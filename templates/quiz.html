@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% block title %}Quiz{% endblock %}
+{% block content %}
+{% if step == 'login' %}
+    <div class="card">
+        <h2>Login or Register</h2>
+        <form method="POST">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit" name="action" value="login" class="btn">Login</button>
+            <button type="submit" name="action" value="register" class="btn">Register</button>
+        </form>
+    </div>
+{% elif step == 'select_topic' %}
+    <div class="card">
+        <h2>Select Quiz Topics</h2>
+        <form method="POST">
+            <div class="topic-checkboxes">
+                <label><input type="checkbox" name="topic" value="Python"> Python</label>
+                <label><input type="checkbox" name="topic" value="JavaScript"> JavaScript</label>
+                <label><input type="checkbox" name="topic" value="DevOps"> DevOps</label>
+                <label><input type="checkbox" name="topic" value="Databases"> Databases</label>
+                <label><input type="checkbox" name="topic" value="Food"> Food</label>
+                <label><input type="checkbox" name="topic" value="Science"> Science</label>
+                <label><input type="checkbox" name="topic" value="Technology"> Technology</label>
+                <label><input type="checkbox" name="topic" value="History"> History</label>
+                <label><input type="checkbox" name="topic" value="Arts"> Arts</label>
+                <label><input type="checkbox" name="topic" value="Sports"> Sports</label>
+                <label><input type="checkbox" name="topic" value="Movies"> Movies</label>
+                <label><input type="checkbox" name="topic" value="Music"> Music</label>
+                <label><input type="checkbox" name="topic" value="Geography"> Geography</label>
+                <label><input type="checkbox" name="topic" value="Literature"> Literature</label>
+                <label><input type="checkbox" name="topic" value="Mathematics"> Mathematics</label>
+                <label><input type="checkbox" name="topic" value="Health"> Health</label>
+                <label><input type="checkbox" name="topic" value="Nature"> Nature</label>
+                <label><input type="checkbox" name="topic" value="Space"> Space</label>
+                <label><input type="checkbox" name="topic" value="Fashion"> Fashion</label>
+                <label><input type="checkbox" name="topic" value="Business"> Business</label>
+            </div>
+            <button type="submit" name="action" value="start_quiz" class="btn">Start Quiz</button>
+        </form>
+    </div>
+{% elif step == 'question' %}
+    <div class="card quiz-question">
+        <h3>Question {{ question_num }} of {{ total_questions }}</h3>
+        <p>{{ question.question }}</p>
+        <form id="quiz-form" method="POST" action="{{ url_for('quiz') }}">
+            <input type="hidden" name="action" value="answer">
+            <input type="hidden" name="topic" value="{{ question.topic }}">
+            <input type="hidden" id="answer" name="answer" value="">
+            <div class="quiz-options">
+                {% for option in question.options %}
+                    <button type="button" class="quiz-option" data-answer="{{ option }}">{{ option }}</button>
+                {% endfor %}
+            </div>
+        </form>
+    </div>
+{% elif step == 'result' %}
+    <div class="card">
+        <h2>Quiz Complete!</h2>
+        <p>Your score: {{ score }} points</p>
+        <h3>Scoreboard</h3>
+        <table class="leaderboard-table">
+            <tr>
+                <th>Question</th>
+                <th>Your Answer</th>
+                <th>Correct Answer</th>
+                <th>Status</th>
+            </tr>
+            {% for answer in user_answers %}
+                <tr>
+                    <td>{{ answer.question }}</td>
+                    <td>{{ answer.user_answer }}</td>
+                    <td>{{ answer.correct_answer }}</td>
+                    <td>{{ 'Correct' if answer.is_correct else 'Incorrect' }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+        <form method="POST">
+            <button type="submit" name="action" value="play_again" class="btn">Play Another Quiz</button>
+        </form>
+        <a href="{{ url_for('leaderboard') }}" class="btn">View Leaderboard</a>
+    </div>
+{% endif %}
+{% for message in get_flashed_messages() %}
+    <p class="flash-message">{{ message }}</p>
+{% endfor %}
+<style>
+    .topic-checkboxes {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+    .topic-checkboxes label {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+</style>
+{% endblock %}

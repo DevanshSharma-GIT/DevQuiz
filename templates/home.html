@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<div class="hero">
+    <h1>Welcome to DevQuiz</h1>
+    <p>Challenge your mind with exciting quizzes across 14 categories! From coding to cuisine, movies to music, earn points, climb the leaderboard, and redeem awesome rewards.</p>
+    <a href="{{ url_for('quiz') }}" class="btn neon-glow">Start Quiz Now</a>
+</div>
+<div class="container">
+    <section class="categories">
+        <h2>Explore Our Quiz Categories</h2>
+        <div class="category-grid">
+            <div class="category-card">
+                <h3>Tech & Coding</h3>
+                <p>Test your skills in Python, JavaScript, DevOps, and Databases.</p>
+            </div>
+            <div class="category-card">
+                <h3>Entertainment</h3>
+                <p>Dive into Movies, Music, and Arts with fun trivia.</p>
+            </div>
+            <div class="category-card">
+                <h3>Knowledge</h3>
+                <p>Explore Science, History, Geography, and Literature.</p>
+            </div>
+            <div class="category-card">
+                <h3>Lifestyle</h3>
+                <p>Master Food and Sports quizzes for a tasty challenge.</p>
+            </div>
+        </div>
+    </section>
+    <section class="testimonials">
+        <h2>What Players Say</h2>
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <p>"DevQuiz is addictive! I love the variety of topics and the thrill of earning points."</p>
+                <span>- Alex, Quiz Enthusiast</span>
+            </div>
+            <div class="testimonial-card">
+                <p>"The tech quizzes helped me brush up my coding knowledge while having fun!"</p>
+                <span>- Priya, Developer</span>
+            </div>
+            <div class="testimonial-card">
+                <p>"I redeemed my points for a voucher – such a cool reward system!"</p>
+                <span>- Sam, Trivia Master</span>
+            </div>
+        </div>
+    </section>
+    <section class="about">
+        <h2>About DevQuiz</h2>
+        <p>DevQuiz is your go-to platform for fun, engaging, and rewarding quizzes. Powered by The Trivia API, we offer fresh questions every time across tech, entertainment, and general knowledge. Compete, learn, and win!</p>
+        <p>Built with Python, Flask, SQLite, and a passion for trivia. Check out the source code on <a href="https://github.com/DevanshSharma-GIT" class="boxed-link">GitHub</a> or visit my <a href="https://devanshsharma-git.github.io/Portfolio-/" class="boxed-link">Portfolio</a>.</p>
+    </section>
+    <section class="cta">
+        <h2>Ready to Test Your Knowledge?</h2>
+        <a href="{{ url_for('quiz') }}" class="btn neon-glow">Join the Quiz Revolution!</a>
+    </section>
+</div>
+{% endblock %}
