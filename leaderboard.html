@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}Leaderboard{% endblock %}
+{% block content %}
+<h2>Leaderboard</h2>
+<table class="leaderboard-table">
+    <tr>
+        <th>Rank</th>
+        <th>Username</th>
+        <th>Points</th>
+    </tr>
+    {% for leader in leaders %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ leader[0] }}</td>
+            <td>{{ leader[1] }}</td>
+        </tr>
+    {% endfor %}
+</table>
+<a href="{{ url_for('quiz') }}" class="btn">Back to Quiz</a>
+{% endblock %}
